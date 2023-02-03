@@ -1,7 +1,7 @@
-import * as JobsheetController from "../controllers/jobsheet";
-import { Router } from "express";
+var Router = require("express").Router();
+var JobsheetController = require("../controllers/jobsheet");
 
 Router.post("/one", JobsheetController.one);
 Router.post("/many", JobsheetController.many);
 
-export default Router;
+module.exports = Router;

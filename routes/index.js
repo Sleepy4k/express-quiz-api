@@ -1,8 +1,8 @@
-import { Router } from "express";
+var Router = require("express").Router();
 
 /* GET home page. */
 Router.get("/", function (req, res, next) {
   res.render("index", { title: "Express" });
 });
 
-export default Router;
+module.exports = Router;

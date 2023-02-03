@@ -1,5 +1,5 @@
-import * as QuizController from "../controllers/quiz";
-import { Router } from "express";
+var Router = require("express").Router();
+var QuizController = require("../controllers/quiz");
 
 Router.get("/", QuizController.index);
 Router.post("/store", QuizController.store);
@@ -10,4 +10,4 @@ Router.delete("/:id", QuizController.destroy);
 Router.get("/category/:id", QuizController.categoryId);
 Router.get("/level/:id", QuizController.levelId);
 
-export default Router;
+module.exports = Router;
