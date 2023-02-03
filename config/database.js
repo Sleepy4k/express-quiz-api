@@ -14,4 +14,4 @@ database.pool = {
   idle: 10000,
 };
 
-export default database;
+module.exports = database;
