@@ -1,8 +1,8 @@
 export default function (sequelize, DataTypes) {
-  return sequelize.define('quiz', {
+  return sequelize.define("quiz", {
     question: {
       type: DataTypes.STRING,
-      validate: { notEmpty: { msg: 'Question must not be empty' } },
+      validate: { notEmpty: { msg: "Question must not be empty" } },
     },
     a: {
       type: DataTypes.STRING,
@@ -18,15 +18,15 @@ export default function (sequelize, DataTypes) {
     },
     answer: {
       type: DataTypes.STRING,
-      validate: { notEmpty: { msg: 'Answer must not be empty' } },
+      validate: { notEmpty: { msg: "Answer must not be empty" } },
     },
     categoryId: {
       type: DataTypes.INTEGER,
-      validate: { notEmpty: { msg: 'Category must not be empty' } },
+      validate: { notEmpty: { msg: "Category must not be empty" } },
     },
     levelId: {
       type: DataTypes.INTEGER,
-      validate: { notEmpty: { msg: 'Level must not be empty' } },
+      validate: { notEmpty: { msg: "Level must not be empty" } },
     },
   });
 }
