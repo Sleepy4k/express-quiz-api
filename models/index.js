@@ -1,8 +1,8 @@
-import Sequelize from "sequelize";
-import database from "../config/database";
+var Sequelize = require("sequelize");
+var database = require("../config/database");
 
 const sequelize = new Sequelize(
-  config.table,
+  database.table,
   database.user,
   database.password,
   {
@@ -26,4 +26,4 @@ db.level = require("./level")(sequelize, Sequelize);
 db.quiz.belongsTo(db.category, { foreignKey: "categoryId" });
 db.quiz.belongsTo(db.level, { foreignKey: "levelId" });
 
-export default db;
+module.exports = db;

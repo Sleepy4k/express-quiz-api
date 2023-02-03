@@ -1,4 +1,4 @@
-export default function (sequelize, DataTypes) {
+const Quiz = (sequelize, DataTypes) => {
   return sequelize.define("quiz", {
     question: {
       type: DataTypes.STRING,
@@ -29,4 +29,6 @@ export default function (sequelize, DataTypes) {
       validate: { notEmpty: { msg: "Level must not be empty" } },
     },
   });
-}
+};
+
+module.exports = Quiz;
