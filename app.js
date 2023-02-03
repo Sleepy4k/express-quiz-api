@@ -1,12 +1,12 @@
-import createError from "http-errors";
-import express from "express";
-import path from "path";
-import cookieParser from "cookie-parser";
-import logger from "morgan";
+var createError = require("http-errors");
+var express = require("express");
+var path = require("path");
+var cookieParser = require("cookie-parser");
+var logger = require("morgan");
 
-import indexRouter from "./routes/index";
-import quizRouter from "./routes/quiz";
-import jobsheetRouter from "./routes/jobsheet";
+var indexRouter = require("./routes/index");
+var quizRouter = require("./routes/quiz");
+var jobsheetRouter = require("./routes/jobsheet");
 
 var app = express();
 
@@ -40,4 +40,4 @@ app.use(function (err, req, res, next) {
   res.render("error");
 });
 
-export default app;
+module.exports = app;
