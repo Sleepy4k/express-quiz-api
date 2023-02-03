@@ -1,4 +1,4 @@
-import db from '../models';
+import db from "../models";
 const { quiz } = db;
 
 // POST /jobsheets/one
@@ -9,13 +9,25 @@ export const one = (req, res, next) => {
     .findOne({ where: { id: quizId } })
     .then((quiz) => {
       if (quiz.answer === answer) {
-        res.status(200).json({ status: 'success', message: 'Answer is correct', data: quiz });
+        res.status(200).json({
+          status: "success",
+          message: "Answer is correct",
+          data: quiz,
+        });
       } else {
-        res.status(200).json({ status: 'success', message: 'Answer is incorrect', data: quiz });
+        res.status(200).json({
+          status: "success",
+          message: "Answer is incorrect",
+          data: quiz,
+        });
       }
     })
     .catch((error) => {
-      res.status(500).json({ status: 'error', message: 'Internal server error', data: error });
+      res.status(500).json({
+        status: "error",
+        message: "Internal server error",
+        data: error,
+      });
     });
 };
 
@@ -29,7 +41,11 @@ export const many = (req, res, next) => {
 
     for (let i = 0; i < quizId.length; i++) {
       quiz
-        .findOne({ limit: 1, where: { id: quizId[i] }, order: [['id', 'DESC']] })
+        .findOne({
+          limit: 1,
+          where: { id: quizId[i] },
+          order: [["id", "DESC"]],
+        })
         .then((quiz) => {
           if (quiz.answer === answer[i]) {
             correct++;
@@ -38,12 +54,22 @@ export const many = (req, res, next) => {
           }
         })
         .catch((error) => {
-          res.status(500).json({ status: 'error', message: 'Internal server error', data: error });
+          res.status(500).json({
+            status: "error",
+            message: "Internal server error",
+            data: error,
+          });
         });
     }
 
-    res.status(200).json({ status: 'success', message: 'Answer is correct', data: { correct, incorrect } });
+    res.status(200).json({
+      status: "success",
+      message: "Answer is correct",
+      data: { correct, incorrect },
+    });
   } catch (error) {
-    res.status(500).json({ status: 'error', message: 'Internal server error', data: error });
+    res
+      .status(500)
+      .json({ status: "error", message: "Internal server error", data: error });
   }
 };

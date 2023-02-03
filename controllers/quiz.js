@@ -1,4 +1,4 @@
-import db from '../models';
+import db from "../models";
 const { quiz, category, level } = db;
 
 // GET /quizzes
@@ -6,15 +6,23 @@ export const index = (req, res, next) => {
   quiz
     .findAll({
       include: [
-        { model: category, attributes: ['name'] },
-        { model: level, attributes: ['name'] },
+        { model: category, attributes: ["name"] },
+        { model: level, attributes: ["name"] },
       ],
     })
     .then((quizzes) => {
-      res.status(202).json({ status: 'success', message: 'Quizzes fetched successfully', data: quizzes });
+      res.status(202).json({
+        status: "success",
+        message: "Quizzes fetched successfully",
+        data: quizzes,
+      });
     })
     .catch((error) => {
-      res.status(500).json({ status: 'error', message: 'Internal server error', data: error });
+      res.status(500).json({
+        status: "error",
+        message: "Internal server error",
+        data: error,
+      });
     });
 };
 
@@ -25,10 +33,18 @@ export const store = (req, res, next) => {
   quiz
     .create({ question, answer })
     .then((quiz) => {
-      res.status(201).json({ status: 'success', message: 'Quiz created successfully', data: quiz });
+      res.status(201).json({
+        status: "success",
+        message: "Quiz created successfully",
+        data: quiz,
+      });
     })
     .catch((error) => {
-      res.status(500).json({ status: 'error', message: 'Internal server error', data: error });
+      res.status(500).json({
+        status: "error",
+        message: "Internal server error",
+        data: error,
+      });
     });
 };
 
@@ -39,10 +55,18 @@ export const show = (req, res, next) => {
   quiz
     .findByPk(id, { rejectOnEmpty: true })
     .then((quiz) => {
-      res.status(206).json({ status: 'success', message: 'Quiz fetched successfully', data: quiz });
+      res.status(206).json({
+        status: "success",
+        message: "Quiz fetched successfully",
+        data: quiz,
+      });
     })
     .catch((error) => {
-      res.status(500).json({ status: 'error', message: 'Internal server error', data: error });
+      res.status(500).json({
+        status: "error",
+        message: "Internal server error",
+        data: error,
+      });
     });
 };
 
@@ -59,10 +83,18 @@ export const update = (req, res, next) => {
       return quiz.save();
     })
     .then((quiz) => {
-      res.status(202).json({ status: 'success', message: 'Quiz updated successfully', data: quiz });
+      res.status(202).json({
+        status: "success",
+        message: "Quiz updated successfully",
+        data: quiz,
+      });
     })
     .catch((error) => {
-      res.status(500).json({ status: 'error', message: 'Internal server error', data: error });
+      res.status(500).json({
+        status: "error",
+        message: "Internal server error",
+        data: error,
+      });
     });
 };
 
@@ -76,10 +108,18 @@ export const destroy = (req, res, next) => {
       return quiz.destroy();
     })
     .then(() => {
-      res.status(202).json({ status: 'success', message: 'Quiz deleted successfully', data: null });
+      res.status(202).json({
+        status: "success",
+        message: "Quiz deleted successfully",
+        data: null,
+      });
     })
     .catch((error) => {
-      res.status(500).json({ status: 'error', message: 'Internal server error', data: error });
+      res.status(500).json({
+        status: "error",
+        message: "Internal server error",
+        data: error,
+      });
     });
 };
 
@@ -90,10 +130,18 @@ export const categoryId = (req, res, next) => {
   quiz
     .findAll({ where: { categoryId: id } })
     .then((quizzes) => {
-      res.status(202).json({ status: 'success', message: 'Quizzes fetched successfully', data: quizzes });
+      res.status(202).json({
+        status: "success",
+        message: "Quizzes fetched successfully",
+        data: quizzes,
+      });
     })
     .catch((error) => {
-      res.status(500).json({ status: 'error', message: 'Internal server error', data: error });
+      res.status(500).json({
+        status: "error",
+        message: "Internal server error",
+        data: error,
+      });
     });
 };
 
@@ -104,9 +152,17 @@ export const levelId = (req, res, next) => {
   quiz
     .findAll({ where: { levelId: id } })
     .then((quizzes) => {
-      res.status(202).json({ status: 'success', message: 'Quizzes fetched successfully', data: quizzes });
+      res.status(202).json({
+        status: "success",
+        message: "Quizzes fetched successfully",
+        data: quizzes,
+      });
     })
     .catch((error) => {
-      res.status(500).json({ status: 'error', message: 'Internal server error', data: error });
+      res.status(500).json({
+        status: "error",
+        message: "Internal server error",
+        data: error,
+      });
     });
 };
