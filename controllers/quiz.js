@@ -1,8 +1,8 @@
-import db from "../models";
+var db = require("../models");
 const { quiz, category, level } = db;
 
 // GET /quizzes
-export const index = (req, res, next) => {
+exports.index = (req, res, next) => {
   quiz
     .findAll({
       include: [
@@ -14,20 +14,20 @@ export const index = (req, res, next) => {
       res.status(202).json({
         status: "success",
         message: "Quizzes fetched successfully",
-        data: quizzes,
+        data: quizzes || {},
       });
     })
     .catch((error) => {
       res.status(500).json({
         status: "error",
         message: "Internal server error",
-        data: error,
+        data: error || {},
       });
     });
 };
 
 // POST /quizzes/store
-export const store = (req, res, next) => {
+exports.store = (req, res, next) => {
   const { question, answer } = req.body;
 
   quiz
@@ -36,20 +36,20 @@ export const store = (req, res, next) => {
       res.status(201).json({
         status: "success",
         message: "Quiz created successfully",
-        data: quiz,
+        data: quiz || {},
       });
     })
     .catch((error) => {
       res.status(500).json({
         status: "error",
         message: "Internal server error",
-        data: error,
+        data: error || {},
       });
     });
 };
 
 // GET /quizzes/:id
-export const show = (req, res, next) => {
+exports.show = (req, res, next) => {
   const id = req.params.id;
 
   quiz
@@ -58,20 +58,20 @@ export const show = (req, res, next) => {
       res.status(206).json({
         status: "success",
         message: "Quiz fetched successfully",
-        data: quiz,
+        data: quiz || {},
       });
     })
     .catch((error) => {
       res.status(500).json({
         status: "error",
         message: "Internal server error",
-        data: error,
+        data: error || {},
       });
     });
 };
 
 // PUT /quizzes/:id
-export const update = (req, res, next) => {
+exports.update = (req, res, next) => {
   const id = req.params.id;
   const { question, answer } = req.body;
 
@@ -86,20 +86,20 @@ export const update = (req, res, next) => {
       res.status(202).json({
         status: "success",
         message: "Quiz updated successfully",
-        data: quiz,
+        data: quiz || {},
       });
     })
     .catch((error) => {
       res.status(500).json({
         status: "error",
         message: "Internal server error",
-        data: error,
+        data: error || {},
       });
     });
 };
 
 // DELETE /quizzes/:id
-export const destroy = (req, res, next) => {
+exports.destroy = (req, res, next) => {
   const id = req.params.id;
 
   quiz
@@ -118,13 +118,13 @@ export const destroy = (req, res, next) => {
       res.status(500).json({
         status: "error",
         message: "Internal server error",
-        data: error,
+        data: error || {},
       });
     });
 };
 
 // GET /quizzes/category/:id
-export const categoryId = (req, res, next) => {
+exports.categoryId = (req, res, next) => {
   const id = req.params.id;
 
   quiz
@@ -133,20 +133,20 @@ export const categoryId = (req, res, next) => {
       res.status(202).json({
         status: "success",
         message: "Quizzes fetched successfully",
-        data: quizzes,
+        data: quizzes || {},
       });
     })
     .catch((error) => {
       res.status(500).json({
         status: "error",
         message: "Internal server error",
-        data: error,
+        data: error || {},
       });
     });
 };
 
 // GET /quizzes/level/:id
-export const levelId = (req, res, next) => {
+exports.levelId = (req, res, next) => {
   const id = req.params.id;
 
   quiz
@@ -155,14 +155,14 @@ export const levelId = (req, res, next) => {
       res.status(202).json({
         status: "success",
         message: "Quizzes fetched successfully",
-        data: quizzes,
+        data: quizzes || {},
       });
     })
     .catch((error) => {
       res.status(500).json({
         status: "error",
         message: "Internal server error",
-        data: error,
+        data: error || {},
       });
     });
 };

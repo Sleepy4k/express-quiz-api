@@ -1,8 +1,9 @@
-import db from "../models";
+var db = require("../models");
+
 const { quiz } = db;
 
 // POST /jobsheets/one
-export const one = (req, res, next) => {
+exports.one = (req, res, next) => {
   const { quizId, answer } = req.body;
 
   quiz
@@ -12,13 +13,13 @@ export const one = (req, res, next) => {
         res.status(200).json({
           status: "success",
           message: "Answer is correct",
-          data: quiz,
+          data: quiz || {},
         });
       } else {
         res.status(200).json({
           status: "success",
           message: "Answer is incorrect",
-          data: quiz,
+          data: quiz || {},
         });
       }
     })
@@ -26,13 +27,13 @@ export const one = (req, res, next) => {
       res.status(500).json({
         status: "error",
         message: "Internal server error",
-        data: error,
+        data: error || {},
       });
     });
 };
 
 // POST /jobsheets/many
-export const many = (req, res, next) => {
+exports.many = (req, res, next) => {
   const { quizId, answer } = req.body;
 
   try {
@@ -57,7 +58,7 @@ export const many = (req, res, next) => {
           res.status(500).json({
             status: "error",
             message: "Internal server error",
-            data: error,
+            data: error || {},
           });
         });
     }
@@ -70,6 +71,10 @@ export const many = (req, res, next) => {
   } catch (error) {
     res
       .status(500)
-      .json({ status: "error", message: "Internal server error", data: error });
+      .json({
+        status: "error",
+        message: "Internal server error",
+        data: error || {},
+      });
   }
 };
