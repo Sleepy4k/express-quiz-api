@@ -1,15 +1,10 @@
-var db = require("../models");
+const db = require("../database/models");
 const { quiz, category, level } = db;
 
 // GET /quizzes
 exports.index = (req, res, next) => {
   quiz
-    .findAll({
-      include: [
-        { model: category, attributes: ["name"] },
-        { model: level, attributes: ["name"] },
-      ],
-    })
+    .findAll()
     .then((quizzes) => {
       res.status(202).json({
         status: "success",
