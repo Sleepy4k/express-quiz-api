@@ -1,17 +1,37 @@
 require("dotenv").config();
 
-const database = {};
-
-database.host = process.env.DB_HOST || "localhost";
-database.user = process.env.DB_USER || "root";
-database.password = process.env.DB_PASSWORD || "";
-database.table = process.env.DB_DATABASE || "quizapi";
-database.dialect = process.env.DB_CONNECTION || "mysql";
-database.pool = {
-  max: 5,
-  min: 0,
-  acquire: 30000,
-  idle: 10000,
+module.exports = {
+  development: {
+    username: process.env.DEV_DB_USERNAME || "root",
+    password: process.env.DEV_DB_PASSWORD || "",
+    database: process.env.DEV_DB_NAME || "quizapi",
+    host: process.env.DEV_DB_HOSTNAME || "localhost",
+    port: process.env.DEV_DB_PORT || 3306,
+    dialect: "mysql",
+    dialectOptions: {
+      bigNumberStrings: true,
+    },
+  },
+  test: {
+    username: process.env.CI_DB_USERNAME || "root",
+    password: process.env.CI_DB_PASSWORD || "",
+    database: process.env.CI_DB_NAME || "quizapi",
+    host: process.env.CI_DB_HOSTNAME || "localhost",
+    port: process.env.CI_DB_PORT || 3306,
+    dialect: "mysql",
+    dialectOptions: {
+      bigNumberStrings: true,
+    },
+  },
+  production: {
+    username: process.env.PROD_DB_USERNAME || "root",
+    password: process.env.PROD_DB_PASSWORD || "",
+    database: process.env.PROD_DB_NAME || "quizapi",
+    host: process.env.PROD_DB_HOSTNAME || "localhost",
+    port: process.env.PROD_DB_PORT || 3306,
+    dialect: "mysql",
+    dialectOptions: {
+      bigNumberStrings: true,
+    },
+  },
 };
-
-module.exports = database;
