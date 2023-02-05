@@ -1,5 +1,5 @@
-var Router = require("express").Router();
-var QuizController = require("../controllers/quiz");
+const Router = require("express").Router();
+const QuizController = require("../controllers/quiz");
 
 Router.get("/", QuizController.index);
 Router.post("/store", QuizController.store);
