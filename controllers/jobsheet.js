@@ -1,5 +1,4 @@
-var db = require("../models");
-
+const db = require("../database/models");
 const { quiz } = db;
 
 // POST /jobsheets/one
@@ -69,12 +68,10 @@ exports.many = (req, res, next) => {
       data: { correct, incorrect },
     });
   } catch (error) {
-    res
-      .status(500)
-      .json({
-        status: "error",
-        message: "Internal server error",
-        data: error || {},
-      });
+    res.status(500).json({
+      status: "error",
+      message: "Internal server error",
+      data: error || {},
+    });
   }
 };
