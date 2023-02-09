@@ -1,163 +1,368 @@
+/**
+ * Module dependencies.
+ */
 const db = require("../models");
-const { quiz } = db;
+const { quiz, category, level } = db;
 
-// GET /quizzes
-exports.index = (req, res, next) => {
-  quiz
-    .findAll()
-    .then((quizzes) => {
-      res.status(202).json({
-        status: "success",
-        message: "Quizzes fetched successfully",
-        data: quizzes || {},
+/**
+ * Display a listing of the resource.
+ *
+ * @param  Request  req
+ * @param  Response  res
+ * @param  Next  next
+ *
+ * @return Array
+ */
+exports.index = async (req, res, next) => {
+  try {
+    await quiz
+      .findAll({
+        attributes: {
+          exclude: ["categoryId", "levelId", "createdAt", "updatedAt"],
+        },
+        include: [
+          {
+            model: category,
+            as: "category",
+            attributes: ["id", "name"],
+          },
+          {
+            model: level,
+            as: "level",
+            attributes: ["id", "name"],
+          },
+        ],
+      })
+      .then((quizzes) => {
+        res.status(202).json({
+          status: "success",
+          message: "Quizzes fetched successfully",
+          data: quizzes || {},
+        });
+      })
+      .catch((error) => {
+        res.status(500).json({
+          status: "error",
+          message: "Internal server error",
+          data: error.message || {},
+        });
       });
-    })
-    .catch((error) => {
-      res.status(500).json({
-        status: "error",
-        message: "Internal server error",
-        data: error || {},
-      });
+  } catch (error) {
+    res.status(500).json({
+      status: "error",
+      message: "Internal server error",
+      data: error.message || {},
     });
+  }
 };
 
-// POST /quizzes/store
-exports.store = (req, res, next) => {
-  const { question, answer } = req.body;
+/**
+ * Store a newly created resource in storage.
+ *
+ * @param  Request  req
+ * @param  Response  res
+ * @param  Next  next
+ *
+ * @return Array
+ */
+exports.store = async (req, res, next) => {
+  const { question, a, b, c, d, answer, categoryId, levelId } = req.body;
 
-  quiz
-    .create({ question, answer })
-    .then((quiz) => {
-      res.status(201).json({
-        status: "success",
-        message: "Quiz created successfully",
-        data: quiz || {},
+  try {
+    await quiz
+      .create({ question, a, b, c, d, answer, categoryId, levelId })
+      .then((quiz) => {
+        res.status(201).json({
+          status: "success",
+          message: "Quiz created successfully",
+          data: quiz || {},
+        });
+      })
+      .catch((error) => {
+        res.status(500).json({
+          status: "error",
+          message: "Internal server error",
+          data: error.message || {},
+        });
       });
-    })
-    .catch((error) => {
-      res.status(500).json({
-        status: "error",
-        message: "Internal server error",
-        data: error || {},
-      });
+  } catch (error) {
+    res.status(500).json({
+      status: "error",
+      message: "Internal server error",
+      data: error.message || {},
     });
+  }
 };
 
-// GET /quizzes/:id
-exports.show = (req, res, next) => {
+/**
+ * Display the specified resource.
+ *
+ * @param  Request  req
+ * @param  Response  res
+ * @param  Next  next
+ *
+ * @return Array
+ */
+exports.show = async (req, res, next) => {
   const id = req.params.id;
 
-  quiz
-    .findByPk(id, { rejectOnEmpty: true })
-    .then((quiz) => {
-      res.status(206).json({
-        status: "success",
-        message: "Quiz fetched successfully",
-        data: quiz || {},
+  try {
+    await quiz
+      .findByPk(id, {
+        rejectOnEmpty: true,
+        include: [
+          {
+            model: category,
+            as: "category",
+            attributes: ["id", "name"],
+          },
+          {
+            model: level,
+            as: "level",
+            attributes: ["id", "name"],
+          },
+        ],
+        attributes: {
+          exclude: ["categoryId", "levelId", "createdAt", "updatedAt"],
+        },
+      })
+      .then((quiz) => {
+        res.status(206).json({
+          status: "success",
+          message: "Quiz fetched successfully",
+          data: quiz || {},
+        });
+      })
+      .catch((error) => {
+        res.status(500).json({
+          status: "error",
+          message: "Internal server error",
+          data: error.message || {},
+        });
       });
-    })
-    .catch((error) => {
-      res.status(500).json({
-        status: "error",
-        message: "Internal server error",
-        data: error || {},
-      });
+  } catch (error) {
+    res.status(500).json({
+      status: "error",
+      message: "Internal server error",
+      data: error.message || {},
     });
+  }
 };
 
-// PUT /quizzes/:id
-exports.update = (req, res, next) => {
+/**
+ * Update the specified resource in storage.
+ *
+ * @param  Request  req
+ * @param  Response  res
+ * @param  Next  next
+ *
+ * @return Array
+ */
+exports.update = async (req, res, next) => {
   const id = req.params.id;
-  const { question, answer } = req.body;
+  const { question, a, b, c, d, answer, categoryId, levelId } = req.body;
 
-  quiz
-    .findByPk(id, { rejectOnEmpty: true })
-    .then((quiz) => {
-      quiz.question = question;
-      quiz.answer = answer;
-      return quiz.save();
-    })
-    .then((quiz) => {
-      res.status(202).json({
-        status: "success",
-        message: "Quiz updated successfully",
-        data: quiz || {},
+  try {
+    await quiz
+      .findByPk(id, {
+        rejectOnEmpty: true,
+        include: [
+          {
+            model: category,
+            as: "category",
+            attributes: ["id", "name"],
+          },
+          {
+            model: level,
+            as: "level",
+            attributes: ["id", "name"],
+          },
+        ],
+        attributes: {
+          exclude: ["categoryId", "levelId", "createdAt", "updatedAt"],
+        },
+      })
+      .then((quiz) => {
+        quiz.question = question;
+        quiz.a = a;
+        quiz.b = b;
+        quiz.c = c;
+        quiz.d = d;
+        quiz.answer = answer;
+        quiz.categoryId = categoryId;
+        quiz.levelId = levelId;
+        return quiz.save();
+      })
+      .then((quiz) => {
+        res.status(202).json({
+          status: "success",
+          message: "Quiz updated successfully",
+          data: quiz || {},
+        });
+      })
+      .catch((error) => {
+        res.status(500).json({
+          status: "error",
+          message: "Internal server error",
+          data: error.message || {},
+        });
       });
-    })
-    .catch((error) => {
-      res.status(500).json({
-        status: "error",
-        message: "Internal server error",
-        data: error || {},
-      });
+  } catch (error) {
+    res.status(500).json({
+      status: "error",
+      message: "Internal server error",
+      data: error.message || {},
     });
+  }
 };
 
-// DELETE /quizzes/:id
-exports.destroy = (req, res, next) => {
+/**
+ * Remove the specified resource from storage.
+ *
+ * @param  Request  req
+ * @param  Response  res
+ * @param  Next  next
+ *
+ * @return Array
+ */
+exports.destroy = async (req, res, next) => {
   const id = req.params.id;
 
-  quiz
-    .findByPk(id, { rejectOnEmpty: true })
-    .then((quiz) => {
-      return quiz.destroy();
-    })
-    .then(() => {
-      res.status(202).json({
-        status: "success",
-        message: "Quiz deleted successfully",
-        data: null,
+  try {
+    await quiz
+      .findByPk(id, { rejectOnEmpty: true })
+      .then((quiz) => {
+        return quiz.destroy();
+      })
+      .then(() => {
+        res.status(202).json({
+          status: "success",
+          message: "Quiz deleted successfully",
+          data: null,
+        });
+      })
+      .catch((error) => {
+        res.status(500).json({
+          status: "error",
+          message: "Internal server error",
+          data: error.message || {},
+        });
       });
-    })
-    .catch((error) => {
-      res.status(500).json({
-        status: "error",
-        message: "Internal server error",
-        data: error || {},
-      });
+  } catch (error) {
+    res.status(500).json({
+      status: "error",
+      message: "Internal server error",
+      data: error.message || {},
     });
+  }
 };
 
-// GET /quizzes/category/:id
-exports.categoryId = (req, res, next) => {
+/**
+ * Display a listing of the resource with specified category.
+ *
+ * @param  Request  req
+ * @param  Response  res
+ * @param  Next  next
+ *
+ * @return Array
+ */
+exports.categoryId = async (req, res, next) => {
   const id = req.params.id;
 
-  quiz
-    .findAll({ where: { categoryId: id } })
-    .then((quizzes) => {
-      res.status(202).json({
-        status: "success",
-        message: "Quizzes fetched successfully",
-        data: quizzes || {},
+  try {
+    await quiz
+      .findAll({
+        where: { categoryId: id },
+        attributes: {
+          exclude: ["categoryId", "levelId", "createdAt", "updatedAt"],
+        },
+        include: [
+          {
+            model: category,
+            as: "category",
+            attributes: ["id", "name"],
+          },
+          {
+            model: level,
+            as: "level",
+            attributes: ["id", "name"],
+          },
+        ],
+      })
+      .then((quizzes) => {
+        res.status(202).json({
+          status: "success",
+          message: "Quizzes fetched successfully",
+          data: quizzes || {},
+        });
+      })
+      .catch((error) => {
+        res.status(500).json({
+          status: "error",
+          message: "Internal server error",
+          data: error.message || {},
+        });
       });
-    })
-    .catch((error) => {
-      res.status(500).json({
-        status: "error",
-        message: "Internal server error",
-        data: error || {},
-      });
+  } catch (error) {
+    res.status(500).json({
+      status: "error",
+      message: "Internal server error",
+      data: error.message || {},
     });
+  }
 };
 
-// GET /quizzes/level/:id
-exports.levelId = (req, res, next) => {
+/**
+ * Display a listing of the resource with specified level.
+ *
+ * @param  Request  req
+ * @param  Response  res
+ * @param  Next  next
+ *
+ * @return Array
+ */
+exports.levelId = async (req, res, next) => {
   const id = req.params.id;
 
-  quiz
-    .findAll({ where: { levelId: id } })
-    .then((quizzes) => {
-      res.status(202).json({
-        status: "success",
-        message: "Quizzes fetched successfully",
-        data: quizzes || {},
+  try {
+    await quiz
+      .findAll({
+        where: { levelId: id },
+        attributes: {
+          exclude: ["categoryId", "levelId", "createdAt", "updatedAt"],
+        },
+        include: [
+          {
+            model: category,
+            as: "category",
+            attributes: ["id", "name"],
+          },
+          {
+            model: level,
+            as: "level",
+            attributes: ["id", "name"],
+          },
+        ],
+      })
+      .then((quizzes) => {
+        res.status(202).json({
+          status: "success",
+          message: "Quizzes fetched successfully",
+          data: quizzes || {},
+        });
+      })
+      .catch((error) => {
+        res.status(500).json({
+          status: "error",
+          message: "Internal server error",
+          data: error.message || {},
+        });
       });
-    })
-    .catch((error) => {
-      res.status(500).json({
-        status: "error",
-        message: "Internal server error",
-        data: error || {},
-      });
+  } catch (error) {
+    res.status(500).json({
+      status: "error",
+      message: "Internal server error",
+      data: error.message || {},
     });
+  }
 };

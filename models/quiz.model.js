@@ -1,5 +1,8 @@
 "use strict";
 
+/**
+ * Module dependencies.
+ */
 const { Model } = require("sequelize");
 
 module.exports = (sequelize, DataTypes) => {
@@ -21,15 +24,19 @@ module.exports = (sequelize, DataTypes) => {
       },
       a: {
         type: DataTypes.STRING,
+        validate: { notEmpty: { msg: "A must not be empty" } },
       },
       b: {
         type: DataTypes.STRING,
+        validate: { notEmpty: { msg: "B must not be empty" } },
       },
       c: {
         type: DataTypes.STRING,
+        validate: { notEmpty: { msg: "C must not be empty" } },
       },
       d: {
         type: DataTypes.STRING,
+        validate: { notEmpty: { msg: "D must not be empty" } },
       },
       answer: {
         type: DataTypes.STRING,

@@ -1,5 +1,8 @@
 "use strict";
 
+/**
+ * Module dependencies.
+ */
 const { Model } = require("sequelize");
 
 module.exports = (sequelize, DataTypes) => {

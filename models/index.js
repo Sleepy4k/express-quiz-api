@@ -1,12 +1,20 @@
+/**
+ * Module dependencies.
+ */
 require("dotenv").config();
-
 const Sequelize = require("sequelize");
 const env = require("../config/app").env;
 const { development, test, production } = require("../config/database");
 
+/**
+ * Init connection type.
+ */
 const connection =
   env === "development" ? development : env === "test" ? test : production;
 
+/**
+ * Connect server to database using connection type data.
+ */
 const sequelize = new Sequelize(
   connection.database,
   connection.username,
