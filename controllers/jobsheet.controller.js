@@ -1,4 +1,4 @@
-const db = require("../database/models");
+const db = require("../models");
 const { quiz } = db;
 
 // POST /jobsheets/one
