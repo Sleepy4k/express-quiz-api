@@ -1,0 +1,184 @@
+{
+    "client": "Thunder Client",
+    "collectionName": "express-quiz-api",
+    "dateExported": "2023-02-09T17:07:49.534Z",
+    "version": "1.1",
+    "folders": [
+        {
+            "_id": "69632a62-4948-47b5-bf21-70d93ce6900b",
+            "name": "quiz",
+            "containerId": "",
+            "created": "2023-02-09T15:20:45.395Z",
+            "sortNum": 10000
+        },
+        {
+            "_id": "0ac4928d-bd08-4d69-8beb-99c412dbae17",
+            "name": "jobsheet",
+            "containerId": "",
+            "created": "2023-02-09T15:20:51.659Z",
+            "sortNum": 20000
+        }
+    ],
+    "requests": [
+        {
+            "_id": "27c9f824-f361-4cb2-b771-4e251fbcc731",
+            "colId": "ebb9b743-92d4-461b-8ab7-d44d4959bd07",
+            "containerId": "",
+            "name": "landing",
+            "url": "http://localhost:3000",
+            "method": "GET",
+            "sortNum": 20000,
+            "created": "2023-02-09T15:20:59.123Z",
+            "modified": "2023-02-09T15:21:10.954Z",
+            "headers": [],
+            "params": [],
+            "tests": []
+        },
+        {
+            "_id": "ec8e1acd-dd0e-4e20-a5a2-d4a155e3f891",
+            "colId": "ebb9b743-92d4-461b-8ab7-d44d4959bd07",
+            "containerId": "69632a62-4948-47b5-bf21-70d93ce6900b",
+            "name": "get data",
+            "url": "http://localhost:3000/api/quiz",
+            "method": "GET",
+            "sortNum": 30000,
+            "created": "2023-02-09T15:21:25.540Z",
+            "modified": "2023-02-09T17:07:22.350Z",
+            "headers": [],
+            "params": [],
+            "tests": []
+        },
+        {
+            "_id": "f441a043-87ee-4302-b4ec-97cd59bf64db",
+            "colId": "ebb9b743-92d4-461b-8ab7-d44d4959bd07",
+            "containerId": "69632a62-4948-47b5-bf21-70d93ce6900b",
+            "name": "create data",
+            "url": "http://localhost:3000/api/quiz",
+            "method": "POST",
+            "sortNum": 40000,
+            "created": "2023-02-09T15:21:44.957Z",
+            "modified": "2023-02-09T17:07:26.159Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"question\": \"Mantan gue kelas mana?\",\n  \"a\": \"rpl 1\",\n  \"b\": \"rpl 2\",\n  \"c\": \"rpl 3\",\n  \"d\": \"rpl 4\",\n  \"answer\": \"b\",\n  \"categoryId\": 2,\n  \"levelId\": 2\n}",
+                "form": []
+            },
+            "tests": []
+        },
+        {
+            "_id": "f8083dbd-39a7-4319-afb3-d1956cd2dc00",
+            "colId": "ebb9b743-92d4-461b-8ab7-d44d4959bd07",
+            "containerId": "69632a62-4948-47b5-bf21-70d93ce6900b",
+            "name": "update data",
+            "url": "http://localhost:3000/api/quiz/1",
+            "method": "PUT",
+            "sortNum": 50000,
+            "created": "2023-02-09T15:25:52.759Z",
+            "modified": "2023-02-09T17:07:30.054Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"question\": \"Ngantuk terjadi ketika sedang apa?\",\n  \"a\": \"ngoding terlalu lama\",\n  \"b\": \"mendengarkan khutbah\",\n  \"c\": \"udah malem\",\n  \"d\": \"sujud ketika solat\",\n  \"answer\": \"d\"\n}",
+                "form": []
+            },
+            "tests": []
+        },
+        {
+            "_id": "053e1716-7784-4ffe-8778-8aa1c7cc1cc9",
+            "colId": "ebb9b743-92d4-461b-8ab7-d44d4959bd07",
+            "containerId": "69632a62-4948-47b5-bf21-70d93ce6900b",
+            "name": "get spesific data",
+            "url": "http://localhost:3000/api/quiz/1",
+            "method": "GET",
+            "sortNum": 60000,
+            "created": "2023-02-09T15:29:03.504Z",
+            "modified": "2023-02-09T17:07:31.606Z",
+            "headers": [],
+            "params": [],
+            "tests": []
+        },
+        {
+            "_id": "1dee2ef6-d011-45aa-9e81-38542eb94444",
+            "colId": "ebb9b743-92d4-461b-8ab7-d44d4959bd07",
+            "containerId": "69632a62-4948-47b5-bf21-70d93ce6900b",
+            "name": "delete data",
+            "url": "http://localhost:3000/api/quiz/1",
+            "method": "DELETE",
+            "sortNum": 70000,
+            "created": "2023-02-09T15:29:22.462Z",
+            "modified": "2023-02-09T17:07:33.095Z",
+            "headers": [],
+            "params": [],
+            "tests": []
+        },
+        {
+            "_id": "ac9db14c-997a-4ae4-ac28-25442bd71054",
+            "colId": "ebb9b743-92d4-461b-8ab7-d44d4959bd07",
+            "containerId": "69632a62-4948-47b5-bf21-70d93ce6900b",
+            "name": "get data by category",
+            "url": "http://localhost:3000/api/quiz/category/2",
+            "method": "GET",
+            "sortNum": 80000,
+            "created": "2023-02-09T15:29:51.504Z",
+            "modified": "2023-02-09T17:07:35.359Z",
+            "headers": [],
+            "params": [],
+            "tests": []
+        },
+        {
+            "_id": "72a31858-b1e6-492e-be6e-58997b48a91d",
+            "colId": "ebb9b743-92d4-461b-8ab7-d44d4959bd07",
+            "containerId": "69632a62-4948-47b5-bf21-70d93ce6900b",
+            "name": "get data by level",
+            "url": "http://localhost:3000/api/quiz/level/2",
+            "method": "GET",
+            "sortNum": 90000,
+            "created": "2023-02-09T15:30:15.097Z",
+            "modified": "2023-02-09T17:07:36.927Z",
+            "headers": [],
+            "params": [],
+            "tests": []
+        },
+        {
+            "_id": "8b6cefe6-b5e2-4668-b616-216e2b639faf",
+            "colId": "ebb9b743-92d4-461b-8ab7-d44d4959bd07",
+            "containerId": "0ac4928d-bd08-4d69-8beb-99c412dbae17",
+            "name": "submit one answer",
+            "url": "http://localhost:3000/api/jobsheet/one",
+            "method": "POST",
+            "sortNum": 100000,
+            "created": "2023-02-09T15:30:43.626Z",
+            "modified": "2023-02-09T15:32:22.502Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n \"quizId\": 1,\n \"answer\": \"b\"\n}",
+                "form": []
+            },
+            "tests": []
+        },
+        {
+            "_id": "9d433fbd-4f8d-4221-b4ca-68a7c00ac255",
+            "colId": "ebb9b743-92d4-461b-8ab7-d44d4959bd07",
+            "containerId": "0ac4928d-bd08-4d69-8beb-99c412dbae17",
+            "name": "submit many answer",
+            "url": "http://localhost:3000/api/jobsheet/many",
+            "method": "POST",
+            "sortNum": 110000,
+            "created": "2023-02-09T15:32:25.798Z",
+            "modified": "2023-02-09T16:29:35.395Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n \"quizId\": [\n   1,\n   3\n ],\n \"answer\": [\n  \"a\",\n  \"c\"\n ]\n}",
+                "form": []
+            },
+            "tests": []
+        }
+    ]
+}
