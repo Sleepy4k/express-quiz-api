@@ -1,7 +1,10 @@
-const Router = require("express").Router();
-const JobsheetController = require("../controllers/jobsheet");
+const router = require("express").Router();
+const jobsheetController = require("../controllers/jobsheet.controller");
 
-Router.post("/one", JobsheetController.one);
-Router.post("/many", JobsheetController.many);
+/* POST one listing. */
+router.post("/one", jobsheetController.one);
 
-module.exports = Router;
+/* POST many listing. */
+router.post("/many", jobsheetController.many);
+
+module.exports = router;
