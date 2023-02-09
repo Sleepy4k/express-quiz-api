@@ -1,8 +1,8 @@
 require("dotenv").config();
 
 const Sequelize = require("sequelize");
-const env = require("../../config/app").env;
-const { development, test, production } = require("../../config/database");
+const env = require("../config/app").env;
+const { development, test, production } = require("../config/database");
 
 const connection =
   env === "development" ? development : env === "test" ? test : production;
@@ -30,9 +30,9 @@ db.Sequelize = Sequelize;
 db.sequelize = sequelize;
 
 // Models/tables
-db.quiz = require("./quiz")(sequelize, Sequelize);
-db.category = require("./category")(sequelize, Sequelize);
-db.level = require("./level")(sequelize, Sequelize);
+db.quiz = require("./quiz.model")(sequelize, Sequelize);
+db.category = require("./category.model")(sequelize, Sequelize);
+db.level = require("./level.model")(sequelize, Sequelize);
 
 // Relations
 db.quiz.belongsTo(db.category, { foreignKey: "categoryId" });

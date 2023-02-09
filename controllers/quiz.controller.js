@@ -1,5 +1,5 @@
-const db = require("../database/models");
-const { quiz, category, level } = db;
+const db = require("../models");
+const { quiz } = db;
 
 // GET /quizzes
 exports.index = (req, res, next) => {

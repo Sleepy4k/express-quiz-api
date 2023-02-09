@@ -1,12 +1,12 @@
-const Router = require("express").Router();
-const name = require("../config/app").name;
+const router = require("express").Router();
 
-/* GET home page. */
-Router.get("/", function (req, res, next) {
-  res.render("index", { title: name });
-});
+/* RESOURCE landing. */
+router.use("/", require("./landing"));
 
-Router.use("/api/quizzes", require("./quiz"));
-Router.use("/api/jobsheet", require("./jobsheet"));
+/* RESOURCE quiz. */
+router.use("/api/quiz", require("./quiz"));
 
-module.exports = Router;
+/* RESOURCE jobsheet. */
+router.use("/api/jobsheet", require("./jobsheet"));
+
+module.exports = router;
